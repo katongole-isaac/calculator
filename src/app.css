@@ -1,24 +1,111 @@
-* {
-  box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+:root {
+  --displayScreenHeight: 20%;
+  --noteHeight: 15%;
+  --appBgColor: #fafafa;
+  --appTextColor: #003049;
+  --answerSectionHeight: 25%;
+  --numberSectionHeight: calc(100% - var(--answerSectionHeight));
+  --calculatorBtnBg: #e9ecef;
+  --calculatorBtnBgHover: #ced4da;
+  --calculatorBtnColor: #000;
+  --calculatorBtnWidth: 5rem;
+  --calculatorBtnHeight: 35px;
+  --mainDivHeight: 40%;
+  --userControlsHeight: calc(
+    100% - (var(--noteHeight) + var(--displayScreenHeight))
+  );
 }
 
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #fafafa;
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  user-select: none;
+  color: var(--appTextColor);
 }
-div {
-  margin: auto;
+
+.app {
+  /* background: var(--appBgColor); */
+  background-image: linear-gradient(
+    to right bottom,
+    var(--appBgColor),
+    #f2f2f9
+  );
+}
+.header {
+  position: absolute;
+  top: 2rem;
+  font-weight: 800;
+}
+
+.number-section {
+  flex: 1;
+  font-size: 23px;
+  height: var(--numberSectionHeight);
+  text-align: right;
+  direction: ltr;
+  /* unicode-bidi :embed; */
+}
+
+.answer-section {
+  flex: 0.5;
+  text-align: right;
+  padding: 5px;
+  height: var(--answerSectionHeight);
+}
+.display-screen {
+  height: var(--displayScreenHeight);
+  overflow: hidden;
+}
+.calculator-btn {
+  display: inline-block;
+  background: var(--calculatorBtnBg);
+  color: var(--calculatorBtnColor);
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  flex: 1;
+  height: var(--calculatorBtnHeight);
+  border-radius: 5px;
+}
+.calculator-btn:hover {
+  background: var(--calculatorBtnBgHover);
+  color: var(--calculatorBtnColor);
+}
+
+.user-controls {
+  height: var(--userControlsHeight);
+  min-height: min-content;
+}
+
+.main {
+  height: var(--mainDivHeight);
+  position: absolute;
   width: 400px;
+  top: 6rem;
 }
-div > h2 {
-  text-align: center;
+
+@media screen and (max-width: 549px) {
+  .main {
+    width: 100%;
+    padding: 2rem;
+    top: 5rem;
+  }
+  .display-screen {
+    height: 70px;
+    overflow: hidden;
+  }
 }
-.footer {
-  position: fixed;
-  bottom: 0;
+
+.buttons {
+  overflow-wrap: normal;
 }
-.footer > * {
-  text-align: center;
-  font-style: italic;
+
+.equals {
+  background: #2196d0;
+  color: #fff;
+}
+.equals:hover {
+  background: #2196ff;
+  color: #fff;
 }

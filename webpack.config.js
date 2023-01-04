@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const yaml = require("yamljs");
 const toml = require("toml");
 const json5 = require("json5");
+const webpack = require("webpack");
 
-const cssRegExp = /\.css$/i;
 const imageRegExp = /\.(png|svg|gif|jpe?g)$/i;
 const jsExtensions = ["*", ".js", ".jsx"];
 
@@ -24,10 +24,6 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: cssRegExp,
-        use: ["style-loader", "css-loader"],
-      },
       {
         test: /\.s[ac]ss$/i,
         use: ["style-loader", "css-loader", "sass-loader"],
@@ -76,19 +72,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.html"),
     }),
+
+    new webpack.ProvidePlugin({
+      React: "react",
+    }),
   ],
 
   optimization: {
     runtimeChunk: "single",
-    moduleIds: "deterministic",
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
   },
 };
